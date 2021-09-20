@@ -1,0 +1,561 @@
+package menu;
+import java.util.Map;
+import java.util.Scanner;
+import java.time.*;
+public class Main {
+public static void main(String[] args) {
+LocalDate date = LocalDate.now();
+LocalTime time = LocalTime.now();
+int totalBill = 0;
+int selection;
+Scanner scanner = new Scanner(System.in);
+int infi = 1;
+while (infi != 0) {
+System.out.println("Enter your choice");
+System.out.println("1.Starters");
+System.out.println("2.Chinese");
+System.out.println("3.Indian");
+System.out.println("4.Desserts");
+selection = scanner.nextInt();
+switch (selection) {
+case 1:
+Starters starters = new Starters();
+totalBill += starters.putTotal();
+break;
+case 2:
+ChineseCuisine chineseCuisine = new 
+ChineseCuisine();
+totalBill += chineseCuisine.putTotal();
+break;
+case 3:
+IndianCuisine indianCuisine = new IndianCuisine();
+totalBill+= indianCuisine.putTotal();
+break;
+case 4:
+Dessert dessert = new Dessert();
+totalBill += dessert.putTotal();
+default:
+System.out.println("Wrong Choice");
+break;
+}
+System.out.println("Do you want to order from other 
+Cuisines?(Y/N)");
+String x = scanner.next();
+if (x.equals("N")) {
+ infi = 0;
+}
+}
+// Printing menu
+System.out.println("\n");
+System.out.println("\n");
+System.out.println("-------------Bill-------------");
+LocalDate date1 = LocalDate.now();
+LocalTime time1 = LocalTime.now();
+System.out.println("Date: "+date1+" "+"Time: "+time1);
+System.out.println("Your Orders: ");
+System.out.println("Item Name : Quantity");
+for (Map.Entry mapElement : Cuisine.menu.entrySet()) {
+String key = (String) mapElement.getKey();
+int value = ((int) mapElement.getValue());
+System.out.println(key + " : " + value);
+}
+float tax = 0;
+float service_tax = (float) (0.1*totalBill);
+tax = (float) ((0.15)*totalBill);
+System.out.println("Total amount: "+totalBill+" INR");
+System.out.println("Service Tax 10% :"+service_tax+" INR");
+System.out.println("15% GST: "+tax+" INR");
+System.out.println("Total amount + tax: 
+"+(service_tax+tax+totalBill)+" INR");
+}
+}
+package menu;
+import java.util.HashMap;
+public class Cuisine {
+ int choice;
+ int quantity;
+ static HashMap<String,Integer> menu = new HashMap<String,Integer>();
+}
+//Starters
+package menu;
+import java.util.Scanner;
+public class Starters extends Cuisine {
+int total;
+int ch;
+Starters() {
+boolean inf = true;
+Scanner scan = new Scanner(System.in);
+while (inf) {
+System.out.println("Enter your choice: ");
+System.out.println("1. Spring Roll 160/-");
+System.out.println("2. Paneer Chilli 170/-");
+System.out.println("3. Chicken Tikka 180/-");
+System.out.println("4. Baby Corn Chilli 150/-");
+System.out.println("5. Chilli Chicken 180/-");
+System.out.println("6. Tomato Soup 100/-");
+System.out.println("7. Sweet Corn Soup 130/-");
+System.out.println("8. Chicken Soup 150/-");
+choice = scan.nextInt();
+switch (choice) {
+case 1:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 160);
+menu.put("Spring Roll", quantity);
+break;
+case 2:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 170);
+menu.put("Paneer Chilli", quantity);
+break;
+case 3:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 180);
+ menu.put("Chicken Tikka", quantity);
+break;
+case 4:
+System.out.println("Enter the quantity");
+quantity = scan.nextInt();
+total = total + (quantity * 150);
+menu.put("Baby Corn Chilli", quantity);
+break;
+case 5:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 180);
+ menu.put("Chilli Chicken", quantity);
+break;
+case 6:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 100);
+menu.put("Tomato Soup", quantity);
+break;
+case 7:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 130);
+menu.put("Sweet Corn Soup", quantity);
+break;
+case 8:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 150);
+menu.put("Chicken Soup", quantity);
+break;
+default:
+System.out.println("Wrong Choice");
+break;
+}
+System.out.println("Want to order more Starters?(Y/N) ");
+String x = scan.next();
+if (x.equals("N")) {
+inf = false;
+}
+}
+}
+int putTotal() {
+return total;
+}
+}
+//Chinese
+package menu;
+import java.util.Scanner;
+public class ChineseCuisine extends Cuisine {
+int total;
+int ch;
+ChineseCuisine() {
+boolean inf = true;
+Scanner scan = new Scanner(System.in);
+while (inf) {
+System.out.println("Enter your choice: ");
+System.out.println("1. Veg. Chowmein");
+System.out.println("2. Veg. Hakka Noodles");
+System.out.println("3. Veg. Paneer Chowmein");
+System.out.println("4. Egg Chowmein");
+System.out.println("5. Chicken Chowmein");
+System.out.println("6. Mushroom Noodles");
+System.out.println("7. Veg. Fried Rice");
+System.out.println("8. Egg Fried Rice");
+System.out.println("9. Chicken Fried Rice");
+choice = scan.nextInt();
+switch (choice) {
+case 1:
+System.out.println("Enter your choice 
+1.Half:150/- 2.Full:180/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 150);
+break;
+case 2:
+total = total + (quantity * 180);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Veg.Chowmein", quantity);
+break;
+case 2:
+System.out.println("Enter your choice 
+1.Half:60/- 2.Full:100/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 60);
+break;
+case 2:
+total = total + (quantity * 100);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Veg. Hakka Noodles", quantity);
+break;
+case 3:
+System.out.println("Enter your choice 
+1.Half:170/- 2.Full:220/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 170);
+break;
+case 2:
+total = total + (quantity * 220);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Veg.Paneer Chowmein", quantity);
+break;
+case 4:
+System.out.println("Enter your choice 
+1.Half:170/- 2.Full:220/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 170);
+break;
+case 2:
+total = total + (quantity * 220);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Egg Chowmein", quantity);
+break;
+case 5:
+System.out.println("Enter your choice 
+1.Half:200/- 2.Full:220/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 200);
+break;
+case 2:
+total = total + (quantity * 220);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Chicken Chowmein", quantity);
+break;
+case 6:
+System.out.println("Enter your choice 
+1.Half:80/- 2.Full:150/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 80);
+break;
+case 2:
+total = total + (quantity * 150);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Mushroom Noodles", quantity);
+break;
+case 7:
+System.out.println("Enter your choice 
+1.Half:100/- 2.Full:150/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 100);
+break;
+case 2:
+total = total + (quantity * 150);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Veg. Fried Rice", quantity);
+break;
+case 8:
+System.out.println("Enter your choice 
+1.Half:120/- 2.Full:160/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 120);
+break;
+case 2:
+total = total + (quantity * 160);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Egg Fried Rice", quantity);
+break;
+case 9:
+System.out.println("Enter your choice 
+1.Half:150/- 2.Full:200/-");
+ch = scan.nextInt();
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+switch (ch) {
+case 1:
+total = total + (quantity * 150);
+break;
+case 2:
+total = total + (quantity * 200);
+break;
+default:
+System.out.println("Wrong choice");
+break;
+}
+menu.put("Chicken Fried Rice", quantity);
+break;
+default:
+System.out.println("Wrong Choice");
+break;
+}
+System.out.println("Want to order more Chinese 
+Food?(Y/N)");
+String x = scan.next();
+if (x.equals("N")) {
+ inf = false;
+}
+}
+}
+int putTotal() {
+return total;
+}
+}
+//Indian
+package menu;
+import java.util.Scanner;
+public class IndianCuisine extends Cuisine{
+int total;
+int ch;
+IndianCuisine(){
+boolean inf = true;
+Scanner scan = new Scanner(System.in);
+while (inf) {
+System.out.println("Enter your choice: ");
+System.out.println("1. Mix Veg. Biriyani 250/-");
+System.out.println("2. Chicken Tikka Biriyani 300/-");
+System.out.println("3. Fry Chicken Biriyani 300/-");
+System.out.println("4. Fish Biriyani 280/-");
+System.out.println("5. Chicken Dum Biriyani 320/-");
+System.out.println("6. Veg. Thali 200/-");
+System.out.println("7. Paneer Biriyani 250/-");
+System.out.println("8. Plain Naan 14/-");
+System.out.println("9. Butter Naan 20/-");
+System.out.println("10.Chicken Curry 200/-");
+System.out.println("11.Panner Butter Masala 200/-");
+choice = scan.nextInt();
+switch (choice) {
+case 1:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 250);
+menu.put("Mix Veg. Biriyani", quantity);
+break;
+case 2:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 300);
+menu.put("Chicken Tikka Biriyani", quantity);
+break;
+case 3:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 300);
+ menu.put("Fry Chicken Biriyani", quantity);
+break;
+case 4:
+System.out.println("Enter the quantity");
+quantity = scan.nextInt();
+total = total + (quantity * 280);
+menu.put("Fish Biriyani", quantity);
+break;
+case 5:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 320);
+ menu.put("Chicken Dum Biriyani", quantity);
+break;
+case 6:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 200);
+ menu.put("Veg. Thali", quantity);
+break;
+case 7:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 250);
+ menu.put("Paneer Biriyani", quantity);
+break;
+case 8:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 14);
+ menu.put("Plain Naan", quantity);
+break;
+case 9:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 20);
+ menu.put("Butter Naan", quantity);
+break;
+case 10:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 200);
+ menu.put("Chicken Curry", quantity);
+break;
+case 11:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 200);
+ menu.put("Panner Butter Masala", quantity);
+break;
+default:
+System.out.println("Wrong Choice");
+break;
+}
+System.out.println("Want to order more Indian Food?(Y/N) 
+");
+String x = scan.next();
+if (x.equals("N")) {
+inf = false;
+}
+}
+}
+int putTotal() {
+return total;
+}
+}
+//Dessert
+package menu;
+import java.util.Scanner;
+public class Dessert extends Cuisine{
+int total;
+int ch;
+ Dessert(){
+boolean inf = true;
+Scanner scan = new Scanner(System.in);
+while (inf) {
+System.out.println("Enter your choice: ");
+System.out.println("1. Dark Chocolate Sandwich 150/-");
+System.out.println("2. Chocolate Milkshake 170/-");
+System.out.println("3. Strawberry Milkshake 180/-");
+System.out.println("4. Chocolate Mousse 150/-");
+System.out.println("5. Mango Crush 180/-");
+System.out.println("6. Sweet Lassi 100/-");
+System.out.println("7. Gulab Jamun 10/-");
+System.out.println("8. Kulfi 30/-");
+choice = scan.nextInt();
+switch (choice) {
+case 1:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 150);
+menu.put("Dark Chocolate Sandwich", quantity);
+break;
+case 2:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 170);
+menu.put("Chocolate Milkshake", quantity);
+break;
+case 3:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 180);
+ menu.put("Strawberry Milkshake", quantity);
+break;
+case 4:
+System.out.println("Enter the quantity");
+quantity = scan.nextInt();
+total = total + (quantity * 150);
+menu.put("Chocolate Mousse", quantity);
+break;
+case 5:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 180);
+ menu.put("Mango Crush", quantity);
+break;
+case 6:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 100);
+ menu.put("Sweet Lassi", quantity);
+break;
+case 7:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 100);
+ menu.put("Gulab Jamun", quantity);
+break;
+case 8:
+System.out.println("Enter the quantity: ");
+quantity = scan.nextInt();
+total = total + (quantity * 30);
+ menu.put("Kulfi", quantity);
+break;
+default:
+System.out.println("Wrong Choice");
+break;
+}
+System.out.println("Want to order more Dessserts?(Y/N) ");
+String x = scan.next();
+if (x.equals("N")) {
+inf = false;
+}
+}
+ }
+ int putTotal(){
+ return total;
+ }
+}
